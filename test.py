@@ -1,6 +1,6 @@
 from pyspark.sql import SparkSession
-
 import findspark
+import os
 
 findspark.init()
 
@@ -17,3 +17,9 @@ df = spark \
     .option("subscribe", "my-topic") \
     .option("startingOffsets", "latest") \
     .load()
+
+df.printSchema()
+
+df.selectExpr("CAST(key AS STRING)", "CAST(value AS STRING)")
+
+print("Finished")
